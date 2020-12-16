@@ -79,4 +79,24 @@ class GeniusComputerPlayer(Player):
             best = {'position': None, 'score': math.inf}
 
         for possible_move in state.available_moves():
-            
+            # Make a move, try that spot
+            state.make_move(possible_move, player)
+
+            # Recurse using minimax to simulate a game after making that move
+            sim_score = self.minimax(state, other_player)
+
+            # Undo the move
+            state.board[possible_move] = ' '
+            state.current_winner = None
+            sim_score['position'] = possible_move
+
+            # Update dictionaries if necessary
+            if player == max_player:
+                if sim_score['score'] > best['score']:
+                    best = sim_score
+            else:
+                if sim_score['score'] < best['score']
+                best = sim_score
+        
+        return best
+
