@@ -40,7 +40,16 @@ class  HumanPlayer(Player):
             to an integer, and if it's not, then we say it's invalid. If that spot 
             is not available on the board, we also sat it is invalid
             """
+            try:
+                val = int(square)
+                if val not in game.avaible_moves():
+                    raise ValueError
+                valid_square = True
+            except ValueError:
+                print("Invalid square. Try again.")
             
+        return val
+
 
 
 
